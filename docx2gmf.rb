@@ -24,6 +24,7 @@ def cleanup_content(content)
   # convert underlining of regular text (not anchors) into markdown syntax
   # example: <span class="underline">Cras ac lectus quis</span> => _Cras ac lectus quis_
   # Underlining text is not possible??? ok, so I could spit out a warning here, as the author used a formatting feature that our blog does not support
+  content = content.gsub /<span class="underline">(.*?)<\/span>/m,'[\1]'
 
   # fix unordered lists
   content = content.gsub(/^(\s*)- > /, '\1- ')
@@ -51,39 +52,26 @@ def clean_link_placeholder(text)
 end
 
 def move_links_to_the_end_regex(content)
-  # TODO exclude links to images
-  # matcher = content.scan(/\[(.*?)\]\((.*?)\)/)
-  matcher = content.scan(/[^!]\[(?<text>.*?)\]\((?<url>.*?)\)/)
-  # TODO right now the named groups from the regexp are not shown when I use .scan(). why?
+  # matcher = content.scan(/[^!]\[(?<text>.*?)\]\((?<url>.*?)\)/)
+  # TODO using named groups below would be more descriptive. Need to figure out how.
 
   link_dictionary = {}
 
-  matcher.each do |m|
-    cleaned_link_placeholder = clean_link_placeholder(m[0])
-
-    if not link_dictionary.has_key?(cleaned_link_placeholder)
-      link_dictionary[cleaned_link_placeholder] = m[1]
-    else
-      puts "Found duplicate link placeholder. I am not smart enough yet. Skipping link cleanup."
-      return content
+  content.gsub!(/([^!])\[(.*?)\]\((.*?)\)/) do |match|
+    cleaned_link_placeholder = clean_link_placeholder($2)
+    if not link_dictionary.has_key?($3)
+      link_dictionary[$3] = cleaned_link_placeholder
     end
-
-    # puts "text '#{m[0]}' => #{m[1]}"
+    "#{$1}[#{$2}][#{link_dictionary[$3]}]"
   end
 
-  pp link_dictionary
+  # add link references to the end of the content
+  content += "\n"
+  link_dictionary.each_pair do |url, label|
+      content += "[#{label}]: #{url}\n"
+  end
 
-  # replace all URLs in a link with the link_placeholder
-  # content.gsub(/[^!]\[(?<text>.*?)\]\((?<url>.*?)\)/)
-
-  # add all link placeholders at the end of the blog posts
-
-
-  # TODO idea:
-  # maybe rather use a proper markdown parser to find and replace the links?
-  # https://github.com/gjtorikian/commonmarker
-
-  # pp matcher
+  return content
 end
 
 def convert_to_reference_style_links(content)
@@ -137,7 +125,7 @@ docx_filename = ARGV[0]
 
 content = docx_2_markdown(docx_filename)
 content = cleanup_content(content)
-content = convert_to_reference_style_links(content)
+content = move_links_to_the_end_regex(content)
 content = add_frontmatter(content)
 
 puts content

@@ -26,6 +26,13 @@ So while some post-processing of the markdown is still required, it already make
 
 		ruby docx2gfm.rb my_post.docx > my_post.md
 
+# Finishing touches to your markdown
+
+The markdown produced is good, but it is not 100% polished, so you will have to do some manual steps:
+
+* Double check that all content is there, especially at the beginning of the post (we got a [known bug about this](https://github.com/meltwater/docx2gfm/issues/6))
+* Add the correct image links
+
 # References
 
 - further options to create markdown

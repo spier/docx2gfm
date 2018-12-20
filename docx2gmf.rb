@@ -24,7 +24,7 @@ def cleanup_content(content)
   # convert underlining of regular text (not anchors) into markdown syntax
   # example: <span class="underline">Cras ac lectus quis</span> => _Cras ac lectus quis_
   # Underlining text is not possible??? ok, so I could spit out a warning here, as the author used a formatting feature that our blog does not support
-  content = content.gsub /<span class="underline">(.*?)<\/span>/m,'[\1]'
+  content = content.gsub /<span class="underline">(.*?)<\/span>/m,'\1'
 
   # fix unordered lists
   content = content.gsub(/^(\s*)- > /, '\1- ')

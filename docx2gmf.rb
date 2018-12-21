@@ -2,14 +2,6 @@
 
 require "pp"
 
-if ARGV.length < 1
-  puts "Too few arguments."
-  puts "Provide path to .docx file to be converted to .md (markdown)"
-  puts "Example call:"
-  puts "ruby md-convert.rb my_post.docx"
-  exit
-end
-
 # this removes all sorts of strange stuff that pandoc generates when
 # converting a .docx exported from Google Docs into GFM
 def cleanup_content(content)
@@ -83,6 +75,14 @@ end
 # ------------------
 # MAIN
 # ------------------
+
+if ARGV.length < 1
+  puts "Too few arguments."
+  puts "Provide path to .docx file to be converted to .md (markdown)"
+  puts "Example call:"
+  puts "ruby md-convert.rb my_post.docx"
+  exit
+end
 
 docx_filename = ARGV[0]
 

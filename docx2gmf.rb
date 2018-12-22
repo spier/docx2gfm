@@ -1,20 +1,21 @@
 #!/usr/bin/ruby
 
-require "pp"
+require 'pp'
+require 'optparse'
 
 class Docx2Gmf
-  attr_accessor :docx_filename, :content
+  attr_accessor :options, :content
 
-  def initialize(docx_filename)
-    @docx_filename = docx_filename
+  def initialize(options)
+    @options = options
   end
 
   # perform all conversation and cleanup steps
   def process()
-    docx_2_markdown()
+    docx_2_markdown(@options[:file])
     cleanup_content()
     move_links_to_the_end()
-    add_frontmatter()
+    add_frontmatter() if @options[:jekyll]
   end
 
   # output this document (i.e. the markdown content)
@@ -23,9 +24,10 @@ class Docx2Gmf
   end
 
   # convert docx to initial markdown
-  def docx_2_markdown()
+  def docx_2_markdown(file)
+    # TODO before reading the file, I could check if the file exists
     # TODO check out pandoc options that might be useful e.g. --extract-media='/images/own/'
-    @content = `pandoc #{@docx_filename} -f docx -t gfm`
+    @content = `pandoc #{file} -f docx -t gfm`
   end
 
   # this removes all sorts of strange stuff that pandoc generates when
@@ -92,16 +94,61 @@ end #class
 # MAIN
 # ------------------
 
-if ARGV.length < 1
-  puts "Too few arguments."
-  puts "Provide path to .docx file to be converted to .md (markdown)"
-  puts "Example call:"
-  puts "ruby md-convert.rb my_post.docx"
+# if ARGV.length < 1
+#   puts "Too few arguments."
+#   puts "Provide path to .docx file to be converted to .md (markdown)"
+#   puts "Example call:"
+#   puts "ruby md-convert.rb my_post.docx"
+#   exit
+# end
+#
+# docx_filename = ARGV[0]
+
+
+
+
+options = {}
+options[:jekyll] = true
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: docx2gmf.rb [options]"
+
+  opts.on('-f', '--file FILE', 'The .docx file to convert to markdown') do |v|
+    options[:file] = v
+  end
+  opts.on('-j', '--[no-]jekyll', 'Prefix the markdown output with a jekyll frontmatter') do |v|
+    options[:jekyll] = v
+  end
+  opts.on('-h', '--help', 'Display this help screen') do
+    puts opts
+    exit
+  end
+end
+
+# most useful way of creating a required parameter with OptionParser
+# https://stackoverflow.com/questions/1541294/how-do-you-specify-a-required-switch-not-argument-with-ruby-optionparser/1542658#1542658
+begin
+  parser.parse!
+  mandatory = [:file]
+  missing = mandatory.select{ |param| options[param].nil? }
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+rescue OptionParser::ParseError => e
+  puts e
+  puts parser
   exit
 end
 
-docx_filename = ARGV[0]
+# pp options
+# exit
 
-doc = Docx2Gmf.new(docx_filename)
+doc = Docx2Gmf.new(options)
 doc.process
 puts doc
+
+
+# TODO for this feature
+
+# - check if the file provided is indeed a .docx file (righ tnow it produces an empty output for everything)
+# - update readme with instructions
+# - check if there is a way to provided the file via a ARGV param, rather than an option
+# - remove code that I no longer need

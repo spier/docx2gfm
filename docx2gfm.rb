@@ -3,7 +3,7 @@
 require 'pp'
 require 'optparse'
 
-class Docx2Gmf
+class Docx2Gfm
   attr_accessor :options, :content
 
   def initialize(options)
@@ -130,7 +130,7 @@ rescue OptionParser::ParseError => e
 end
 
 
-doc = Docx2Gmf.new(options)
+doc = Docx2Gfm.new(options)
 doc.process
 puts doc
 

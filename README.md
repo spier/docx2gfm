@@ -24,7 +24,17 @@ So while some post-processing of the markdown is still required, it already make
 1. download your gdoc as a .docx file e.g. my_post.docx (File >> Download as >> Microsoft Word (.docx))
 1. convert gdoc to github-flavored-markdown:
 
-		ruby docx2gfm.rb my_post.docx > my_post.md
+		ruby docx2gfm.rb -f my_post.docx > my_post.md
+
+To learn more about the available commandline options please refer to the built-in help.
+
+		ruby docx2gfm.rb -h		
+
+		Usage: docx2gmf.rb [options]
+    -f, --file FILE                  (required) The .docx file to convert to markdown
+    -j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
+    -r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
+    -h, --help                       Display this help screen
 
 # Finishing touches to your markdown
 

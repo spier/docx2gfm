@@ -1,20 +1,16 @@
-#!/usr/bin/ruby
+class DocxGfmConverter
+  attr_accessor :options, :content
 
-require "pp"
-
-class Docx2Gmf
-  attr_accessor :docx_filename, :content
-
-  def initialize(docx_filename)
-    @docx_filename = docx_filename
+  def initialize(options)
+    @options = options
   end
 
   # perform all conversation and cleanup steps
   def process()
-    docx_2_markdown()
+    docx_2_markdown(@options[:file])
     cleanup_content()
-    move_links_to_the_end()
-    add_frontmatter()
+    create_ref_style_links() if @options[:ref_style_links]
+    add_frontmatter() if @options[:jekyll]
   end
 
   # output this document (i.e. the markdown content)
@@ -23,9 +19,10 @@ class Docx2Gmf
   end
 
   # convert docx to initial markdown
-  def docx_2_markdown()
+  def docx_2_markdown(file)
+    # TODO before reading the file, I could check if the file exists
     # TODO check out pandoc options that might be useful e.g. --extract-media='/images/own/'
-    @content = `pandoc #{@docx_filename} -f docx -t gfm`
+    @content = `pandoc #{file} -f docx -t gfm`
   end
 
   # this removes all sorts of strange stuff that pandoc generates when
@@ -66,7 +63,7 @@ class Docx2Gmf
     text.downcase.gsub(/\s/,'-')
   end
 
-  def move_links_to_the_end()
+  def create_ref_style_links()
     # matcher = content.scan(/[^!]\[(?<text>.*?)\]\((?<url>.*?)\)/)
     # TODO using named groups below would be more descriptive. Need to figure out how.
     link_dictionary = {}
@@ -87,21 +84,3 @@ class Docx2Gmf
   end
 
 end #class
-
-# ------------------
-# MAIN
-# ------------------
-
-if ARGV.length < 1
-  puts "Too few arguments."
-  puts "Provide path to .docx file to be converted to .md (markdown)"
-  puts "Example call:"
-  puts "ruby md-convert.rb my_post.docx"
-  exit
-end
-
-docx_filename = ARGV[0]
-
-doc = Docx2Gmf.new(docx_filename)
-doc.process
-puts doc

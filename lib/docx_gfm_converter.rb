@@ -9,7 +9,7 @@ class DocxGfmConverter
   def process()
     docx_2_markdown(@options[:file])
     cleanup_content()
-    move_links_to_the_end() if @options[:ref_style_links]
+    create_ref_style_links() if @options[:ref_style_links]
     add_frontmatter() if @options[:jekyll]
   end
 
@@ -63,7 +63,7 @@ class DocxGfmConverter
     text.downcase.gsub(/\s/,'-')
   end
 
-  def move_links_to_the_end()
+  def create_ref_style_links()
     # matcher = content.scan(/[^!]\[(?<text>.*?)\]\((?<url>.*?)\)/)
     # TODO using named groups below would be more descriptive. Need to figure out how.
     link_dictionary = {}

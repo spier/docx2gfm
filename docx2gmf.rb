@@ -137,7 +137,6 @@ puts doc
 
 # TODO for this feature
 
-# - update readme with instructions
 # - check if there is a way to provided the file via a ARGV param, rather than an option (why?)
 # - describe in the console help which option is the default (are there better ways to do this?)
 

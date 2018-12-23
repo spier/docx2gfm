@@ -1,22 +1,21 @@
 # docx to github-flavored-markdown converter
 
 When creating blog posts, we typically create them as a google doc, to make collaboration on the content easier.
-Before publishing the post to underthehood.meltwater.com we need to convert the google doc to github-flavored-markdown, as that is what our jekyll-based blog uses.
+Before publishing the post to [underthehood.meltwater.com](https://underthehood.meltwater.com/) we need to convert the google doc to [github-flavored-markdown](https://guides.github.com/features/mastering-markdown/), as that is what our jekyll-based blog uses.
 
 This step is tedious, and some parts are error-prone.
 
-With `docx2gfm.rb` you can do this quickly, and have more time to drink coffee :)
+With `docx2gfm.rb` you can do this conversion quickly, and have more time to drink coffee :)
 
 # Example
 
-md-convert is not flawless yet, but it turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). (also see [gDoc][gDoc])
+docx2gfm is not flawless yet, but it turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). (also see [gDoc][gDoc])
 
-So while some post-processing of the markdown is still required, it already makes the conversation process faster.
+So while some post-processing of the markdown is still required, it already makes the conversation process much faster.
 
 # Installation
 
-1. install [pandoc](https://pandoc.org/installing.html)
-1. install the ruby dependencies via `bundle install`
+- install [pandoc](https://pandoc.org/installing.html)
 
 # How to convert a gdoc
 
@@ -31,10 +30,10 @@ To learn more about the available commandline options please refer to the built-
 		ruby docx2gfm.rb -h		
 
 		Usage: docx2gmf.rb [options]
-    -f, --file FILE                  (required) The .docx file to convert to markdown
-    -j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
-    -r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
-    -h, --help                       Display this help screen
+		-f, --file FILE                  (required) The .docx file to convert to markdown
+		-j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
+		-r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
+		-h, --help                       Display this help screen
 
 # Finishing touches to your markdown
 

@@ -14,7 +14,7 @@ class Docx2Gmf
   def process()
     docx_2_markdown(@options[:file])
     cleanup_content()
-    move_links_to_the_end()
+    move_links_to_the_end() if @options[:ref_style_links]
     add_frontmatter() if @options[:jekyll]
   end
 
@@ -109,15 +109,19 @@ end #class
 
 options = {}
 options[:jekyll] = true
+options[:ref_style_links] = true
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: docx2gmf.rb [options]"
 
-  opts.on('-f', '--file FILE', 'The .docx file to convert to markdown') do |v|
+  opts.on('-f', '--file FILE', '(required) The .docx file to convert to markdown') do |v|
     options[:file] = v
   end
-  opts.on('-j', '--[no-]jekyll', 'Prefix the markdown output with a jekyll frontmatter') do |v|
+  opts.on('-j', '--[no-]jekyll', '(optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll') do |v|
     options[:jekyll] = v
+  end
+  opts.on('-r', '--[no-]ref-style-links', '(optional) Create reference style links at the end of the markdown. Default: --ref-style-links') do |v|
+    options[:ref_style_links] = v
   end
   opts.on('-h', '--help', 'Display this help screen') do
     puts opts
@@ -150,5 +154,6 @@ puts doc
 
 # - check if the file provided is indeed a .docx file (righ tnow it produces an empty output for everything)
 # - update readme with instructions
-# - check if there is a way to provided the file via a ARGV param, rather than an option
+# - check if there is a way to provided the file via a ARGV param, rather than an option (why?)
 # - remove code that I no longer need
+# - describe in the console help which option is the default

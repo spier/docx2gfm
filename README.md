@@ -1,7 +1,7 @@
 # docx to github-flavored-markdown converter
 
 When creating blog posts, we typically create them as a google doc, to make collaboration on the content easier.
-Before publishing the post to [underthehood.meltwater.com](https://underthehood.meltwater.com/) we need to convert the google doc to [github-flavored-markdown](https://guides.github.com/features/mastering-markdown/), as that is what our jekyll-based blog uses.
+Before publishing the post to [underthehood.meltwater.com][uth] we need to convert the google doc to [github-flavored-markdown][gfm], as that is what our jekyll-based blog uses.
 
 This step is tedious, and some parts are error-prone.
 
@@ -15,7 +15,9 @@ So while some post-processing of the markdown is still required, it already make
 
 # Installation
 
-- install [pandoc](https://pandoc.org/installing.html)
+- install [pandoc][pandoc]
+- install ruby (if you don't have it already)
+- Done :)
 
 # How to convert a gdoc
 
@@ -23,17 +25,21 @@ So while some post-processing of the markdown is still required, it already make
 1. download your gdoc as a .docx file e.g. my_post.docx (File >> Download as >> Microsoft Word (.docx))
 1. convert gdoc to github-flavored-markdown:
 
-		ruby docx2gfm.rb -f my_post.docx > my_post.md
+```
+ruby docx2gfm.rb -f my_post.docx > my_post.md
+```
 
 To learn more about the available commandline options please refer to the built-in help.
 
-		ruby docx2gfm.rb -h		
+```
+ruby docx2gfm.rb -h		
 
-		Usage: docx2gmf.rb [options]
-		-f, --file FILE                  (required) The .docx file to convert to markdown
-		-j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
-		-r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
-		-h, --help                       Display this help screen
+Usage: docx2gmf.rb [options]
+-f, --file FILE                  (required) The .docx file to convert to markdown
+-j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
+-r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
+-h, --help                       Display this help screen
+```
 
 # Finishing touches to your markdown
 
@@ -54,4 +60,7 @@ https://github.com/meltwater/meltwater.github.com/issues/104
 - look for docx2md online. maybe something that I can use?
 	https://gist.github.com/vzvenyach/7278543
 
+[uth]: https://underthehood.meltwater.com/
+[gfm]: https://guides.github.com/features/mastering-markdown/
 [gDoc]: https://docs.google.com/document/d/1oKGYVORih0GNC1CZHKv0d2IirCtcgMu0O1sifTfH5zo/edit
+[pandoc]: https://pandoc.org/installing.html

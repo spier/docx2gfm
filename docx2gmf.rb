@@ -94,19 +94,6 @@ end #class
 # MAIN
 # ------------------
 
-# if ARGV.length < 1
-#   puts "Too few arguments."
-#   puts "Provide path to .docx file to be converted to .md (markdown)"
-#   puts "Example call:"
-#   puts "ruby md-convert.rb my_post.docx"
-#   exit
-# end
-#
-# docx_filename = ARGV[0]
-
-
-
-
 options = {}
 options[:jekyll] = true
 options[:ref_style_links] = true
@@ -142,8 +129,6 @@ rescue OptionParser::ParseError => e
   exit
 end
 
-# pp options
-# exit
 
 doc = Docx2Gmf.new(options)
 doc.process
@@ -152,8 +137,10 @@ puts doc
 
 # TODO for this feature
 
-# - check if the file provided is indeed a .docx file (righ tnow it produces an empty output for everything)
 # - update readme with instructions
 # - check if there is a way to provided the file via a ARGV param, rather than an option (why?)
-# - remove code that I no longer need
-# - describe in the console help which option is the default
+# - describe in the console help which option is the default (are there better ways to do this?)
+
+# Other todo:
+# - check if the file provided is indeed a .docx file (righ tnow it produces an empty output for everything)
+# - move class into separate file in ./lib folder (check what the default for gems is)

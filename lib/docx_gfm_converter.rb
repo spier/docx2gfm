@@ -7,7 +7,7 @@ class DocxGfmConverter
 
   # perform all conversation and cleanup steps
   def process()
-    docx_2_markdown(@options[:file])
+    docx_2_gfm(@options[:file])
     cleanup_content()
     create_ref_style_links() if @options[:ref_style_links]
     add_frontmatter() if @options[:jekyll]
@@ -19,10 +19,10 @@ class DocxGfmConverter
   end
 
   # convert docx to initial markdown
-  def docx_2_markdown(file)
+  def docx_2_gfm(file)
     # TODO before reading the file, I could check if the file exists
     # TODO check out pandoc options that might be useful e.g. --extract-media='/images/own/'
-    @content = `pandoc #{file} -f docx -t gfm`
+    @content = `pandoc #{file} -f docx -t gfm --wrap=none`
   end
 
   # this removes all sorts of strange stuff that pandoc generates when
@@ -47,10 +47,8 @@ class DocxGfmConverter
     # fix ordered lists
     @content = @content.gsub(/^(\d+\.)  > /, '\1  ')
 
-    # remove unnecessary line breaks
-    @content = @content.gsub /(\S)\n *(\S)/m, '\1 \2'
-
     # remove `<!-- end list -->`
+    # See http://pandoc.org/MANUAL.html => "Ending a list"
     @content = @content.gsub(/<!-- end list -->/,'')
   end
 

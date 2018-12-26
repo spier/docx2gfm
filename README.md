@@ -1,11 +1,10 @@
 # docx to github-flavored-markdown converter
 
-When creating blog posts, we typically create them as a google doc, to make collaboration on the content easier.
-Before publishing the post to [underthehood.meltwater.com][uth] we need to convert the google doc to [github-flavored-markdown][gfm], as that is what our jekyll-based blog uses.
+When creating blog posts we first create them as a google doc to make the collaboration during the editorial process easier. Before publishing the post to [underthehood.meltwater.com][uth] we need to convert the google doc to [github-flavored-markdown][gfm], as that is what our jekyll-based blog uses.
 
-This step is tedious, and some parts are error-prone.
+This conversion step is tedious, boring, and some parts are error-prone.
 
-With `docx2gfm.rb` you can do this conversion quickly, and have more time to drink coffee :)
+With `docx2gfm.rb` you can do this conversion quickly, and have more time to write new blog posts ... or drink coffee :)
 
 # Example
 
@@ -23,7 +22,7 @@ So while some post-processing of the markdown is still required, it already make
 
 1. reduce headlines of your gdoc to levels h2 and below. In our blog, h1 is reserved for the title of the blog post
 1. download your gdoc as a .docx file e.g. my_post.docx (File >> Download as >> Microsoft Word (.docx))
-1. convert gdoc to github-flavored-markdown:
+1. convert docx to github-flavored-markdown:
 
 ```
 ruby docx2gfm.rb -f my_post.docx > my_post.md
@@ -50,10 +49,20 @@ The markdown produced by docx2gfm is good, but it is not 100% polished. You stil
 * Add code blocks
 * Add quotes
 
+# How to contribute
+
+docx2gfm is far from perfect. Help us make it better by filing an issue or sending a pull request.
+
 # References
 
-- further options to create markdown
-https://github.com/meltwater/meltwater.github.com/issues/104
+* [further options](https://github.com/meltwater/meltwater.github.com/issues/104) to create markdown
+* Word to Markdown Converter: [online](https://word-to-markdown.herokuapp.com/), [source](https://github.com/benbalter/word-to-markdown)
+* [Writage](http://www.writage.com) - Markdown plugin for Microsoft Word
+
+# Maintainer
+
+Sebastian Spier
+
 
 # TODO
 

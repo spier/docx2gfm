@@ -43,5 +43,5 @@ end
 
 # pass on options to the Docx2Gfm Converter, and run the conversion
 doc = DocxGfmConverter.new(options)
-doc.process
+doc.process_markdown
 puts doc

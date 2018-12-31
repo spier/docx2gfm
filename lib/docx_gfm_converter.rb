@@ -16,8 +16,8 @@ class DocxGfmConverter
   def process_markdown()
     docx_2_markdown(@options[:file])
     cleanup_content_markdown()
-    # create_ref_style_links() if @options[:ref_style_links]
-    # add_frontmatter() if @options[:jekyll]
+    create_ref_style_links() if @options[:ref_style_links]
+    add_frontmatter() if @options[:jekyll]
   end
 
   # output this document (i.e. the markdown content)
@@ -35,7 +35,7 @@ class DocxGfmConverter
   def docx_2_markdown(file)
     # TODO before reading the file, I could check if the file exists
     # TODO check out pandoc options that might be useful e.g. --extract-media='/images/own/'
-    @content = `pandoc #{file} --wrap=none --atx-headers --reference-links -f docx -t markdown-bracketed_spans-link_attributes -s`
+    @content = `pandoc #{file} --wrap=none --atx-headers -f docx -t markdown-bracketed_spans-link_attributes -s`
   end
 
   # this removes all sorts of strange stuff that pandoc generates when
@@ -66,8 +66,14 @@ class DocxGfmConverter
   end
 
   def cleanup_content_markdown()
-    # remove 'underlined' text which is not available as a formatting option in markdown 
-    @content = @content.gsub /<span class="underline">(.*?)<\/span>/m,'\1'
+    # remove underlining from links
+    @content = @content.gsub /\[<span class="underline">(.*?)<\/span>\]/m,'[\1]'
+
+    # remove underlining from all other text (and print a warning)
+    @content = @content.gsub(/<span class="underline">(.*?)<\/span>/m) do |match|
+      STDERR.puts "Underline is not supported in markdown. Removing underlining from '#{$1}'."
+      $1
+    end
 
     # fix lists - remove unneccesary spacing before list items
     # 1.  Numbered lists are great

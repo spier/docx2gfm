@@ -76,7 +76,7 @@ It produces the markdown output as shown in [examples/sample-pure-pandoc.md](./e
 While this is pretty good already, this markdown has the following shortcomings:
 
 * lists have some spaces before each list item
-* HTML formatting for underlines is created e.g. `<span class="underline">In mattis lectus</span>` => one could use something similar to `sed -e 's/<[^>]*>//g'` to get rid of the HTML. however this will also remove the HTML placeholders for the images
+* HTML formatting for underlines is created e.g. `<span class="underline">In mattis lectus</span>` => one could use something similar to `sed -e 's/<[^>]*>//g'` to get rid of the HTML. However this will also remove the HTML placeholders for the images, which are handy.
 * less pretty reference-links at the end of the file
 
 

@@ -44,10 +44,11 @@ Usage: docx2gmf.rb [options]
 
 The markdown produced by docx2gfm is good, but it is not 100% polished. You still have to do some manual steps:
 
-* Double-check that all content is there, especially at the beginning of the post (we got a [known bug about this](https://github.com/meltwater/docx2gfm/issues/6))
+* Adapt the YAML Frontmatter (if you used the `--jekyll` option)
 * Add the correct image links
 * Add code blocks
 * Add quotes
+* Add tables
 
 # How to contribute
 

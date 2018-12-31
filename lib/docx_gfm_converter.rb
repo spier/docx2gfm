@@ -8,7 +8,7 @@ class DocxGfmConverter
   # perform all conversation and cleanup steps
   def process_gfm()
     docx_2_gfm(@options[:file])
-    cleanup_content()
+    cleanup_content_gfm()
     create_ref_style_links() if @options[:ref_style_links]
     add_frontmatter() if @options[:jekyll]
   end
@@ -40,7 +40,7 @@ class DocxGfmConverter
 
   # this removes all sorts of strange stuff that pandoc generates when
   # converting a .docx exported from Google Docs into GFM
-  def cleanup_content()
+  def cleanup_content_gfm()
     # remove escaping in front of exclamation marks
     @content = @content.gsub /\\!/, '!'
 

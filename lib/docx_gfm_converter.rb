@@ -6,9 +6,16 @@ class DocxGfmConverter
   end
 
   # perform all conversation and cleanup steps
-  def process()
+  def process_gfm()
     docx_2_gfm(@options[:file])
-    cleanup_content()
+    cleanup_content_gfm()
+    create_ref_style_links() if @options[:ref_style_links]
+    add_frontmatter() if @options[:jekyll]
+  end
+
+  def process_markdown()
+    docx_2_markdown(@options[:file])
+    cleanup_content_markdown()
     create_ref_style_links() if @options[:ref_style_links]
     add_frontmatter() if @options[:jekyll]
   end
@@ -25,9 +32,15 @@ class DocxGfmConverter
     @content = `pandoc #{file} -f docx -t gfm --wrap=none`
   end
 
+  def docx_2_markdown(file)
+    # TODO before reading the file, I could check if the file exists
+    # TODO check out pandoc options that might be useful e.g. --extract-media='/images/own/'
+    @content = `pandoc #{file} --wrap=none --atx-headers -f docx -t markdown-bracketed_spans-link_attributes-smart -s`
+  end
+
   # this removes all sorts of strange stuff that pandoc generates when
   # converting a .docx exported from Google Docs into GFM
-  def cleanup_content()
+  def cleanup_content_gfm()
     # remove escaping in front of exclamation marks
     @content = @content.gsub /\\!/, '!'
 
@@ -50,6 +63,25 @@ class DocxGfmConverter
     # remove `<!-- end list -->`
     # See http://pandoc.org/MANUAL.html => "Ending a list"
     @content = @content.gsub(/<!-- end list -->/,'')
+  end
+
+  def cleanup_content_markdown()
+    # remove underlining from links
+    @content = @content.gsub /\[<span class="underline">(.*?)<\/span>\]/m,'[\1]'
+
+    # remove underlining from all other text (and print a warning)
+    @content = @content.gsub(/<span class="underline">(.*?)<\/span>/m) do |match|
+      STDERR.puts "Underline is not supported in markdown. Removing underlining from '#{$1}'."
+      $1
+    end
+
+    # fix lists - remove unneccesary spacing before list items
+    # 1.  Numbered lists are great
+    # -   And even more bullets
+    @content = @content.gsub(/^(\s*)(-|\d+\.)\s+(\S)/, '\1\2 \3')
+
+    # fix spacing in front of reference links
+    @content = @content.gsub(/^ +(\[.+?\]:)/, '\1')
   end
 
   def add_frontmatter()

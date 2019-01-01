@@ -35,7 +35,7 @@ class DocxGfmConverter
   def docx_2_markdown(file)
     # TODO before reading the file, I could check if the file exists
     # TODO check out pandoc options that might be useful e.g. --extract-media='/images/own/'
-    @content = `pandoc #{file} --wrap=none --atx-headers -f docx -t markdown-bracketed_spans-link_attributes-smart -s`
+    @content = `pandoc #{file} --wrap=none --atx-headers -f docx -t markdown-bracketed_spans-link_attributes-smart-simple_tables -s`
   end
 
   # this removes all sorts of strange stuff that pandoc generates when

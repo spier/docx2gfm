@@ -17,7 +17,7 @@ Nulla ante dui, efficitur ut accumsan id, imperdiet ac urna. Duis nec eros non e
 
 The document that you are looking at was produced by exporting [this Google doc][this-google-doc] as a .docx file, and then running it through this experimental [docx2gfm][docx2gfm] converter.
 
-Let\'s link to the [github repo again][docx2gfm] but with a different link name.
+Let's link to the [github repo again][docx2gfm] but with a different link name.
 
 ## Emphasize section
 
@@ -35,9 +35,9 @@ Not all of these work in [github-flavored-markdown][github-flavored-markdown], b
 
 1. Numbered lists are great
 
-2. If one comes after the ...
+2. If one comes after the …
 
-3. ... other
+3. … other
 
 - Bullet A
 
@@ -75,13 +75,29 @@ Nullam vehicula ac dolor ac ultrices. Integer lacinia urna eu vestibulum tempor.
 
 1. Numbered lists are great
 
-2. If one comes after the ...
+2. If one comes after the …
 
-3. ... other
+3. … other
 
 **Ut bibendum turpis ex**, id consequat elit euismod et. Nam lectus arcu, pharetra tincidunt iaculis a, interdum vitae arcu. Cras ac lectus quis risus laoreet scelerisque. Curabitur metus ex, sagittis sit amet quam vitae, consequat sodales velit. Nulla quis ex urna. Integer et tortor odio. Curabitur euismod feugiat mollis. *Nullam vestibulum tempus feugiat*. Vestibulum porta aliquam mauris non aliquet. Sed aliquam erat ac bibendum lacinia. Nam iaculis ornare lorem, sed consectetur dolor.
 
-[In mattis lectus][in-mattis-lectus] accumsan diam accumsan, in bibendum justo fringilla. Aenean lacinia aliquam ligula vel semper. Phasellus purus ipsum, condimentum in tellus nec, finibus consectetur elit. Nam fringilla, diam id dignissim sodales, magna elit tempor arcu, at pharetra nisi metus eget purus. Donec mollis ac leo in aliquet. Proin congue congue diam, ac euismod est blandit non. Aliquam ac efficitur eros. Mauris mollis commodo fermentum. Donec mattis sit amet risus nec vestibulum. Donec vel sollicitudin dolor. Aliquam aliquet neque ac augue consequat porta. Praesent tristique lobortis tincidunt. Etiam dapibus consequat fringilla. Etiam ac orci a nunc rutrum finibus eget a turpis. Duis vitae venenatis magna, ut vulputate turpis. Nunc fringilla non tellus at egestas.
+[In mattis lectus][in-mattis-lectus] accumsan diam accumsan, in bibendum justo fringilla. Aenean lacinia aliquam ligula vel semper. Phasellus purus ipsum, condimentum in tellus nec, finibus consectetur elit. Nam fringilla, diam id dignissim sodales, magna elit tempor arcu, at pharetra nisi metus eget purus. Donec mollis ac leo in aliquet. Proin congue congue diam, ac euismod est blandit non. Aliquam ac efficitur eros. Mauris mollis commodo fermentum. Donec mattis sit amet risus nec vestibulum. Donec vel sollicitudixn dolor. Aliquam aliquet neque ac augue consequat porta. Praesent tristique lobortis tincidunt. Etiam dapibus consequat fringilla. Etiam ac orci a nunc rutrum finibus eget a turpis. Duis vitae venenatis magna, ut vulputate turpis. Nunc fringilla non tellus at egestas.
+
+## Table Tests
+
+| **TH 1** | **TH 2** | **TH 3** |
+|----------|----------|----------|
+| TD 1     | TD 2     | TD 3     |
+| TD 4     | TD 5     | TD 6     |
+| TD 7     | TD 8     | TD 9     |
+
+## Quote!
+
+Every once in a while you need a great quote. To do so, write your quote and then move the indentation level in the Google Doc to the right, as shown below:
+
+> Blogging is great for your charma.
+>
+> \- Sebastian Spier (2019)
 
 ## Headline 3
 

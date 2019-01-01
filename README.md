@@ -68,7 +68,7 @@ So why not use pandoc straight up you may ask?
 The best pandoc configuration that I could find so far is this:
 
 ```
-pandoc examples/sample.docx --wrap=none --atx-headers --reference-links -f docx -t markdown-bracketed_spans-link_attributes -s
+pandoc examples/sample.docx --wrap=none --atx-headers --reference-links -f docx -t markdown-bracketed_spans-link_attributes-smart-simple_tables -s
 ```
 
 It produces the markdown output as shown in [examples/sample-pure-pandoc.md](./examples/sample-pure-pandoc.md).

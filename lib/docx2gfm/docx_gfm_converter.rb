@@ -85,7 +85,8 @@ class DocxGfmConverter
   end
 
   def add_frontmatter()
-    front_matter = open("./assets/front-matter.md").readlines().join()
+    asset_file = File.join(File.dirname(__FILE__), '/assets/front-matter.md')
+    front_matter = open(asset_file).readlines().join()
     @content = front_matter + "\n" + @content
   end
 

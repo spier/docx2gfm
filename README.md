@@ -69,7 +69,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 `docx2gfm` is far from perfect.
-Bug reports and pull requests are welcome on GitHub at https://github.com/spier/docx2gfm.
+Bug reports and pull requests are welcome on GitHub at [github.com/spier/docx2gfm](https://github.com/spier/docx2gfm).
 
 ## License
 

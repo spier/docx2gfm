@@ -1,7 +1,5 @@
 # Motivation
 
-Why use docx2gfm, instead of using pandoc straight up?
-
 docx2gfm is a wrapper around [pandoc][pandoc], which does the heavy-lifting of the docx to markdown conversation. So why not use pandoc straight up you may ask?
 
 The best pandoc configuration that I could find so far is this:

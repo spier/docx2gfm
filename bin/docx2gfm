@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'docx2gfm'
+puts Docx2gfm::Runner.run()

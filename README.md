@@ -1,49 +1,53 @@
-# docx to github-flavored-markdown converter
+# docx2gfm - docx to github-flavored-markdown converter
 
-For quite a while I have been the maintainer/editor of the engineering blog [underthehood.meltwater.com][uth]. The authors wrote their drafts as Google Docs, and then eventually needed to convert the google doc to [github-flavored-markdown][gfm], as that is what the [jekyll](https://jekyllrb.com)-based blog uses.
+If you need to convert `.docx` documents to markdown, then `docx2gfm` is for you, as it makes the process faster.
 
-This conversion step is tedious, boring, and some parts are error-prone.
+"Don't tell me, show. me"! Ok ok! `docx2gfm` turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). Also see the original [google Doc][gDoc].
 
-With `docx2gfm.rb` you can do this conversion quickly, and have more time to write new blog posts ... or drink coffee :)
+Some post-processing of the markdown is still required but `docx2gfm` already makes the conversion process much faster.
 
-Technically `docx2gfm.rb` is a thin wrapper around [pandoc][pandoc]. Read more about the [motivation](./MOTIVATION.md) here.
+## The Long Story
 
-## Example
+I am maintaining an engineering blog, that uses [jekyll][jekyll] to generate static pages.
 
-docx2gfm is not flawless, but it turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). (also see the original [google Doc][gDoc])
+In our blogging process, the authors write blog post as a Google Doc to collect feedback. Once the post is ready for publishing, they convert the Google Doc to [github-flavored-markdown][gfm], as that is what [jekyll][jekyll] needs as input to render the HTML for the blog.
 
-So while some post-processing of the markdown is still required, it already makes the conversation process much faster.
+We used to do this conversion step manually. This was tedious, boring, and in parts error-prone.
+
+With `docx2gfm` you can do this conversion quickly, and have more time to write new blog posts ... or drink coffee :)
+
+Technically `docx2gfm` is a thin wrapper around [pandoc][pandoc]. In [MOTIVATION.md](./MOTIVATION.md) you find more about the technical approach we chose.
 
 ## Installation
 
-- install [pandoc][pandoc]
 - install ruby
-- Done :)
+- install [pandoc][pandoc]
+- install this gem: `gem install docx2gfm`
 
-## How to convert a gdoc
+## Usage
 
-1. download your gdoc as a `.docx` file e.g. `my_post.docx` (File >> Download as >> Microsoft Word (.docx))
+1. download your Google Doc as a `.docx` file e.g. `my_post.docx` (File >> Download as >> Microsoft Word (.docx))
 1. convert docx to github-flavored-markdown:
 
 ```
-ruby docx2gfm.rb -f my_post.docx > my_post.md
+docx2gfm -f my_post.docx > my_post.md
 ```
 
-To learn more about the available commandline options please refer to the built-in help.
+To learn more about the available options please refer to the built-in help.
 
 ```
-ruby docx2gfm.rb -h		
+$ docx2gfm -h
 
-Usage: docx2gmf.rb [options]
--f, --file FILE                  (required) The .docx file to convert to markdown
--j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
--r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
--h, --help                       Display this help screen
+Usage: docx2gfm [options]
+    -f, --file FILE                  (required) The .docx file to convert to markdown
+    -j, --[no-]jekyll                (optional) Prefix the markdown output with a jekyll frontmatter. Default: --jekyll
+    -r, --[no-]ref-style-links       (optional) Create reference style links at the end of the markdown. Default: --ref-style-links
+    -h, --help                       Display this help screen
 ```
 
 ## Finishing touches for your markdown
 
-The markdown produced by docx2gfm is good, but it is not 100% polished. You still have to do some manual steps:
+The markdown produced by `docx2gfm` is good but not perfect. You still have to do some manual steps:
 
 * Adapt the YAML Frontmatter (if you used the `--jekyll` option)
 * Add the correct image links
@@ -51,16 +55,28 @@ The markdown produced by docx2gfm is good, but it is not 100% polished. You stil
 * Add quotes
 * Add tables
 
-## How to contribute
-
-docx2gfm is far from perfect. Help us make it better by filing an issue or sending a pull request.
-
 ## Alternatives to docx2gfm
 
 * Word to Markdown Converter: [online](https://word-to-markdown.herokuapp.com/), [source](https://github.com/benbalter/word-to-markdown)
 * [Writage](http://www.writage.com) - Markdown plugin for Microsoft Word
 
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+`docx2gfm` is far from perfect.
+Bug reports and pull requests are welcome on GitHub at [github.com/spier/docx2gfm](https://github.com/spier/docx2gfm).
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
 [uth]: https://underthehood.meltwater.com/
 [gfm]: https://guides.github.com/features/mastering-markdown/
 [gDoc]: https://docs.google.com/document/d/16Kww2ic-YgFKskfDxYJu6o_ooSF3IORJh8Ho7XbgngI/edit
 [pandoc]: https://pandoc.org/installing.html
+[jekyll]: https://jekyllrb.com

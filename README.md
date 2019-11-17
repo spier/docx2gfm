@@ -1,10 +1,10 @@
 # docx2gfm - docx to github-flavored-markdown converter
 
-If you need to convert `.docx` documents to markdown, then **docx2gfm** is for you, as it makes the process faster.
+If you need to convert `.docx` documents to markdown, then `docx2gfm` is for you, as it makes the process faster.
 
-`docx2gfm` turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). (also see the original [google Doc][gDoc])
+"Don't tell me, show. me"! Ok ok! `docx2gfm` turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). Also see the original [google Doc][gDoc].
 
-So while some post-processing of the markdown is still required, `docx2gfm` already makes the conversion process much faster.
+Some post-processing of the markdown is still required but `docx2gfm` already makes the conversion process much faster.
 
 ## The Long Story
 

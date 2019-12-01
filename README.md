@@ -1,14 +1,16 @@
 # docx2gfm - docx to github-flavored-markdown converter
 
-If you need to convert `.docx` documents to markdown, then `docx2gfm` is for you, as it makes the process faster.
+If you need to convert `.docx` documents to markdown, then `docx2gfm` helps you to make the process faster.
 
-"Don't tell me, show. me"! Ok ok! `docx2gfm` turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). Also see the original [google Doc][gDoc].
+"Don't tell me, show me"! Ok ok! `docx2gfm` turns [this docx file](./examples/sample.docx) into [this markdown](./examples/sample.md). Also see the original [google Doc][gDoc].
 
-Some post-processing of the markdown is still required but `docx2gfm` already makes the conversion process much faster.
+For another example of `docx2gfm` in action, take a look at this blog post [docx2gfm - Your friendly docx to markdown converter][blog-post].
+
+While some post-processing of the markdown is still required,  `docx2gfm` already makes the conversion process much faster.
 
 ## The Long Story
 
-I am maintaining an engineering blog, that uses [jekyll][jekyll] to generate static pages.
+I am [maintaining an engineering blog][uth-tech-stack], that uses [jekyll][jekyll] to generate static pages.
 
 In our blogging process, the authors write blog post as a Google Doc to collect feedback. Once the post is ready for publishing, they convert the Google Doc to [github-flavored-markdown][gfm], as that is what [jekyll][jekyll] needs as input to render the HTML for the blog.
 
@@ -50,10 +52,10 @@ Usage: docx2gfm [options]
 The markdown produced by `docx2gfm` is good but not perfect. You still have to do some manual steps:
 
 * Adapt the YAML Frontmatter (if you used the `--jekyll` option)
-* Add the correct image links
-* Add code blocks
-* Add quotes
-* Add tables
+* Add the correct image paths
+* Double check code blocks
+* Double check quotes
+* Double check tables
 
 ## Alternatives to docx2gfm
 
@@ -80,3 +82,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 [gDoc]: https://docs.google.com/document/d/16Kww2ic-YgFKskfDxYJu6o_ooSF3IORJh8Ho7XbgngI/edit
 [pandoc]: https://pandoc.org/installing.html
 [jekyll]: https://jekyllrb.com
+[blog-post]: https://spier.hu/2018/12/docx2gfm-your-friendly-docx-to-markdown-converter
+[uth-tech-stack]: https://spier.hu/2019/11/a-simple-tech-stack-for-your-engineering-blog

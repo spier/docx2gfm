@@ -32,6 +32,10 @@ module Docx2gfm
           puts opts
           exit
         end
+        opts.on('-v', '--version', 'Show version of docx2gfm') do
+          puts Docx2gfm::VERSION
+          exit
+        end
       end
 
       # most useful way of creating a required parameter with OptionParser
